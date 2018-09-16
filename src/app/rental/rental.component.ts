@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { fadeAnimation } from '../animations';
+
 
 @Component({
   selector: 'app-rental',
