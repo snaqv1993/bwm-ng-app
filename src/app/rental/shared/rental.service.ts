@@ -74,7 +74,7 @@ export class RentalService {
 		return new Observable<Rental[]>((observer) => {
 			setTimeout(() => {
 				observer.next(this.rentals);
-			}, 1000);
+			}, 0);
 		});
 	}
 }
