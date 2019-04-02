@@ -13,7 +13,7 @@ export class RentalDetailComponent implements OnInit {
 	rental: Rental;
 
   constructor(private route: ActivatedRoute, 
-  				private rentalService: RentalService) { }
+  				private rentalService: RentalService) {}
 
   ngOnInit() {
   	this.route.params.subscribe(

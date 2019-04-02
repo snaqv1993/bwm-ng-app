@@ -9,6 +9,7 @@ import { HeaderComponent } from './common/header/header.component';
 //import { RentalComponent } from './rental/rental.component';
 
 import { RentalModule } from './rental/rental.module';
+// import { MapComponent } from './common/map/map.component';
 
 
 const routes: Routes = [
@@ -18,7 +19,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
+    HeaderComponent
+    // MapComponent,
   ],
   imports: [
   	RouterModule.forRoot(routes),

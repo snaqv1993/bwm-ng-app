@@ -4,6 +4,9 @@ const rental = require('../models/rental');
 
 router.get('', function(req, res){
 	rental.find({} , function(err, foundRentals){
+		if(err){
+			console.log("ASDASDADDDDACCAa");
+		}
 		res.json(foundRentals);
 	});
 });
