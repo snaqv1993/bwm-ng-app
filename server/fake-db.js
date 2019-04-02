@@ -1,10 +1,11 @@
 const Rental = require('./models/rental');
+const mongoose = require('mongoose');
 
 class fakeDb {
 
 	constructor(){
 		this.rentals = [{
-                  title: "Nice view on ocean",
+                  title: "Nice view on beach",
                   city: "San Francisco",
                   street: "Main street",
                   category: "condo",
@@ -12,10 +13,11 @@ class fakeDb {
                   bedrooms: 4,
                   shared: true,
                   description: "Very nice apartment in center of the city.",
-                  dailyRate: 43
+                  dailyRate: 43,
+                  _id: "4eb6e7e7e9b7f4194e000002"
                   },
                   {
-                  title: "Modern apartment in center",
+                  title: "Modern apartment in CBD",
                   city: "New York",
                   street: "Time Square",
                   category: "apartment",
@@ -23,7 +25,8 @@ class fakeDb {
                   bedrooms: 1,
                   shared: false,
                   description: "Very nice apartment in center of the city.",
-                  dailyRate: 11
+                  dailyRate: 11,
+                  _id: "4eb6e7e7e9b7f4194e000003"
                   },
                   {
                   title: "Old house in nature",
@@ -34,16 +37,20 @@ class fakeDb {
                   bedrooms: 5,
                   shared: true,
                   description: "Very nice apartment in center of the city.",
-                  dailyRate: 23
+                  dailyRate: 23,
+                  _id: "4eb6e7e7e9b7f4194e000004"
 		}]
 	}
 
 	async cleanDb(){
-		await Rental.remove({});
+		//await Rental.remove({});
+            await Rental.deleteMany({});
 	}
 
 	pushRentalsToDb(){
 		this.rentals.forEach((rental) => {
+                  //var id = mongoose.Types.ObjectId('4edd40c86762e0fb12000003');
+                  //console.log(id)
 			console.log("asadadsd");
 			const newRental = new Rental(rental);
 			console.log("wwwwww");
@@ -53,8 +60,14 @@ class fakeDb {
 	}
 
 	seedDb(){
-		this.cleanDb();
-		this.pushRentalsToDb();
+            try{
+               this.cleanDb();
+            this.pushRentalsToDb();   
+            }
+            catch(e){
+                  console.log(e.message);
+            }
+		
 	}
 }
 
