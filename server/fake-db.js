@@ -1,8 +1,8 @@
 const Rental = require('./models/rental');
+const User = require('./models/user');
 const mongoose = require('mongoose');
 
 class fakeDb {
-
 	constructor(){
 		this.rentals = [{
                   title: "Nice view on beach",
@@ -13,10 +13,9 @@ class fakeDb {
                   bedrooms: 4,
                   shared: true,
                   description: "Very nice apartment in center of the city.",
-                  dailyRate: 43,
-                  _id: "4eb6e7e7e9b7f4194e000002"
-                  },
-                  {
+                  dailyRate: 43
+            },
+            {
                   title: "Modern apartment in CBD",
                   city: "New York",
                   street: "Time Square",
@@ -25,10 +24,9 @@ class fakeDb {
                   bedrooms: 1,
                   shared: false,
                   description: "Very nice apartment in center of the city.",
-                  dailyRate: 11,
-                  _id: "4eb6e7e7e9b7f4194e000003"
-                  },
-                  {
+                  dailyRate: 11
+            },
+            {
                   title: "Old house in nature",
                   city: "Spisska Nova Ves",
                   street: "Banicka 1",
@@ -37,38 +35,48 @@ class fakeDb {
                   bedrooms: 5,
                   shared: true,
                   description: "Very nice apartment in center of the city.",
-                  dailyRate: 23,
-                  _id: "4eb6e7e7e9b7f4194e000004"
-		}]
-	}
+                  dailyRate: 23
+            }];
 
-	async cleanDb(){
+            this.users = [{
+                  username: "Test User",
+                  email: "test@gmail.com",
+                  password: "testtest"
+            }];
+      }
+
+      async cleanDb(){
 		//await Rental.remove({});
+            await User.deleteMany({});
             await Rental.deleteMany({});
-	}
+      }
 
-	pushRentalsToDb(){
-		this.rentals.forEach((rental) => {
-                  //var id = mongoose.Types.ObjectId('4edd40c86762e0fb12000003');
-                  //console.log(id)
-			console.log("asadadsd");
-			const newRental = new Rental(rental);
-			console.log("wwwwww");
+      pushDataToDb(){
+            const user = new User(this.users[0]);
 
-			newRental.save();
-		})
-	}
+            this.rentals.forEach((rental) => {
+                  console.log("asadadsd");
+                  
+                  const newRental = new Rental(rental);
+                  newRental.user = user;
+                  console.log("wwwwww");
+                  user.rentals.push(newRental)
+                  newRental.save();
+            })
 
-	seedDb(){
+            user.save()
+      }
+
+      async seedDb(){
             try{
-               this.cleanDb();
-            this.pushRentalsToDb();   
+                  await this.cleanDb();
+                  this.pushDataToDb();   
             }
             catch(e){
                   console.log(e.message);
             }
-		
-	}
+
+      }
 }
 
 module.exports = fakeDb;
