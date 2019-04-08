@@ -10,7 +10,7 @@ const rentalRoutes = require('./routes/rentals'),
 mongoose.connect(config.DB_URI, { useNewUrlParser: true, sslValidate: true }).then(()=>{
 	const fakeDb = new FakeDb();
 	// console.log(config.DB_URI);
-	fakeDb.seedDb();
+	//fakeDb.seedDb();
 	// console.log(config.DB_URI);
 }).catch((err) => {
 	console.log(err.message);
