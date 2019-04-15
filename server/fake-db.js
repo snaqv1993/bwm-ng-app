@@ -1,58 +1,26 @@
 const Rental = require('./models/rental');
+const Booking = require('./models/booking');
 const User = require('./models/user');
 const mongoose = require('mongoose');
+const fakeDBData = require('./data.json');
 
 class fakeDb {
 	constructor(){
-		this.rentals = [{
-                  title: "Nice view on beach",
-                  city: "San Francisco",
-                  street: "Main street",
-                  category: "condo",
-                  image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-                  bedrooms: 4,
-                  shared: true,
-                  description: "Very nice apartment in center of the city.",
-                  dailyRate: 43
-            },
-            {
-                  title: "Modern apartment in CBD",
-                  city: "New York",
-                  street: "Time Square",
-                  category: "apartment",
-                  image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-                  bedrooms: 1,
-                  shared: false,
-                  description: "Very nice apartment in center of the city.",
-                  dailyRate: 11
-            },
-            {
-                  title: "Old house in nature",
-                  city: "Spisska Nova Ves",
-                  street: "Banicka 1",
-                  category: "house",
-                  image: "https://booksync-jerga-prod.s3.amazonaws.com/uploads/rental/image/5/image.jpeg",
-                  bedrooms: 5,
-                  shared: true,
-                  description: "Very nice apartment in center of the city.",
-                  dailyRate: 23
-            }];
+		this.rentals = fakeDBData.rentals;
 
-            this.users = [{
-                  username: "Test User",
-                  email: "test@gmail.com",
-                  password: "testtest"
-            }];
+            this.users = fakeDBData.users;
       }
 
       async cleanDb(){
 		//await Rental.remove({});
             await User.deleteMany({});
             await Rental.deleteMany({});
+            await Booking.deleteMany({});
       }
 
       pushDataToDb(){
             const user = new User(this.users[0]);
+            const user2 = new User(this.users[1]);
 
             this.rentals.forEach((rental) => {
                   console.log("asadadsd");
@@ -65,6 +33,7 @@ class fakeDb {
             })
 
             user.save()
+            user2.save()
       }
 
       async seedDb(){
