@@ -13,6 +13,9 @@ import { HeaderComponent } from './common/header/header.component';
 
 import { RentalModule } from './rental/rental.module';
 import { AuthModule } from './auth/auth.module';
+import { ManageModule } from './manage/manage.module'
+import { ManageComponent } from './manage/manage.component';
+
 // import { MapComponent } from './common/map/map.component';
 
 
@@ -23,7 +26,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent
+    HeaderComponent,
+    ManageComponent
     // MapComponent,
   ],
   imports: [
@@ -33,7 +37,8 @@ const routes: Routes = [
     AuthModule,
     NgbModule.forRoot(),
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ManageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

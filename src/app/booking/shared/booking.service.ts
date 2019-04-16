@@ -11,4 +11,8 @@ export class BookingService {
 	public createBooking(booking:any): Observable<any>{
 		return this.http.post('/api/v1/bookings', booking);
 	}
+
+	public getUserBooking() :Observable<any> {
+		return this.http.get('/api/v1/bookings/manage');
+	}
 }
