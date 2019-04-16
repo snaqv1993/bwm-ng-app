@@ -1,10 +1,16 @@
 {
   "name": "bwm-ng-app",
   "version": "0.0.0",
+  "engines": {
+    "node": "10.9.0",
+    "npm": "6.2.0"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --proxy-config proxy.conf.json",
+    "start": "npm run start --prefix server",
+    "start-dev" : "ng serve --proxy-config proxy.conf.json",
     "build": "ng build --prod",
+    "heroku-postbuild": "npm run build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
