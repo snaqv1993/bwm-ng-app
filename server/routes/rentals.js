@@ -11,9 +11,21 @@ router.get('/secret', userController.authMiddleware, function(res, res){
 })
 
 
+router.get('/manage', userController.authMiddleware, function(req, res) {
+	const user = res.locals.user;
+
+	Rental.where({user})
+	.populate('bookings')
+	.exec(function(err, foundRentals) {
+		if(err){
+			return res.status(422).send({errors: normalizeErrors(err.errors)})
+		}
+		return res.json(foundRentals);
+	})
+})
+
 router.get('/:id', function(req, res){
 	const rentalId = req.params.id;
-	console.log(rentalId)
 	Rental.findById(rentalId)
 	.populate('user', 'username -_id')
 	.populate('bookings', 'startAt endAt -_id')
@@ -24,6 +36,41 @@ router.get('/:id', function(req, res){
 		return res.json(foundRentals);
 	})
 });
+
+
+
+router.delete('/:id', userController.authMiddleware, function(req, res) {
+	const user = res.locals.user;
+	const rentalId = req.params.id;
+
+	Rental.findById(rentalId)
+	.populate('user', '_id')
+	.populate({
+		path: 'bookings',
+		select: 'startAt',
+		match: { startAt: { $gt : new Date()}}
+	})
+	.exec(function(err, foundRental) {
+		if(err){
+			return res.status(422).send({errors: normalizeErrors(err.errors)})
+		}
+
+		if(user.id !== foundRental.user.id) {
+			return res.status(422).send({errors: [{title: 'Invalid User!', detail: 'You are not a rental owner!'}]});
+		}
+
+		if(foundRental.bookings.length > 0){
+			return res.status(422).send({errors: [{title: 'Active bookings!', detail: 'Can not delete rental with active bookings!'}]});
+		}
+		foundRental.remove(function(err) {
+			if(err) {
+				return res.status(422).send({errors: normalizeErrors(err.errors)})
+			}
+
+			return res.json({'status' :'deleted'})
+		})
+	})
+})
 
 router.post('', userController.authMiddleware, function(req, res) {
 	const { title,  city,  street, category, image, shared, bedrooms, description, dailyRate } = req.body;
@@ -60,4 +107,4 @@ router.get('', function(req, res){
 
 
 
-	module.exports = router;
+module.exports = router;
