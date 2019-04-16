@@ -7,4 +7,6 @@ const userController = require('../controllers/user');
 
 router.post('', userController.authMiddleware, bookingController.createBooking);
 
+router.get('/manage', userController.authMiddleware, bookingController.getUserBookings);
+
 module.exports = router;
