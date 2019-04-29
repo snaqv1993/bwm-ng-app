@@ -1,4 +1,5 @@
 const express = require('express');
+const compression = require('compression');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const config = require('./config');
@@ -21,6 +22,7 @@ mongoose.connect(config.DB_URI, { useNewUrlParser: true, sslValidate: true }).th
 	console.log(err.message);
 });
 const app = express();
+app.use(compression())
 app.use(bodyParser.json());
 
 app.use('/api/v1/rentals', rentalRoutes);
