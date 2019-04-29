@@ -1,14 +1,17 @@
-import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef, OnDestroy } from '@angular/core';
 import { MapService } from './map.service';
+import { Subject } from 'rxjs';
 
 @Component({
 	selector: 'bwm-map',
 	templateUrl: './map.component.html',
 	styleUrls: ['./map.component.css']
 })
-export class MapComponent implements OnInit {
+export class MapComponent implements OnInit, OnDestroy {
 
 	@Input() location: string;
+
+	@Input() locationSubject : Subject<any>;
 	isPositionError: boolean = false;
 
 	lat: number;
@@ -17,15 +20,21 @@ export class MapComponent implements OnInit {
 	constructor(private mapService: MapService, private ref: ChangeDetectorRef) { }
 
 	ngOnInit() {
-
+		if(this.locationSubject) {
+			this.locationSubject.subscribe((location: string) => {
+				this.getLocation(location)
+			});
+		}
 	}
 
-	mapReadyHandler() {
-		// let currentLoc = this.location;
-		// if (Math.round(Math.random() * 10) > 5){
-		// 	currentLoc = "sadnasdnalkdns31ioio13442423432";
-		// }
-		this.mapService.getGeoLocation(this.location).subscribe(
+	ngOnDestroy(){
+		if(this.locationSubject) {
+			this.locationSubject.unsubscribe();
+		}
+	}
+
+	getLocation(location) {
+		this.mapService.getGeoLocation(location).subscribe(
 			(cordinates) =>{
 				this.lat = cordinates.lat;
 				this.lng = cordinates.lng;
@@ -34,5 +43,9 @@ export class MapComponent implements OnInit {
 				this.isPositionError = true;
 				this.ref.detectChanges();
 			});
+	}
+
+	mapReadyHandler() {
+		this.getLocation(this.location);
 	}
 }
