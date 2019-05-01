@@ -15,6 +15,8 @@ import { RentalModule } from './rental/rental.module';
 import { AuthModule } from './auth/auth.module';
 import { ManageModule } from './manage/manage.module'
 import { ManageComponent } from './manage/manage.component';
+//import { EditableImageComponent } from './common/component/editable/editable-image/editable-image.component';
+
 
 
 // import { MapComponent } from './common/map/map.component';
