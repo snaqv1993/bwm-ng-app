@@ -8,6 +8,7 @@ import { Daterangepicker } from 'ng2-daterangepicker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { EditableModule } from '../common/components/editable/editable.module';
+import { ImageUploadModule } from '../common/components/image-upload/image-upload.module';
 
 
 import { RentalListComponent } from './rental-list/rental-list.component';
@@ -66,7 +67,8 @@ const routes: Routes = [
     	MapModule,
     	Daterangepicker,
     	FormsModule,
-    	EditableModule
+    	EditableModule,
+    	ImageUploadModule
 	],
 	providers: [
 		RentalService,
