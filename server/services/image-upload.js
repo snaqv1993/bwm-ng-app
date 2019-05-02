@@ -8,10 +8,10 @@ const conf = require('../config')
 aws.config.update({
   secretAccessKey : conf.AWS_SECRET_ACCESS_KEY,
   accessKeyId : conf.AWS_ACCESS_KEY_ID,
-  region : 'us-east-1',
-  httpOptions: { 
-    agent: proxy('http://proxy.tafensw.edu.au:8080') 
-  }
+  // region : 'us-east-1',
+  // httpOptions: { 
+  //   agent: proxy('http://proxy.tafensw.edu.au:8080') 
+  // }
 })
 
 const s3 = new aws.S3()
@@ -29,7 +29,7 @@ const upload = multer({
   fileFilter,
   storage: multerS3({
     s3: s3,
-    bucket: 'bwm-dev-ng-ali',
+    bucket: 'bwm-dev-ng-ali2',
     acl: 'public-read',
     metadata: function (req, file, cb) {
       cb(null, {fieldName: "TESTING_METADATA"});
