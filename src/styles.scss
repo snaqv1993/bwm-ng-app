@@ -3,6 +3,7 @@
 @import 'variables';
 @import 'rental-detail';
 
+
 html, body, p {
 color: $main-text-color;
 }
@@ -123,3 +124,6 @@ font-size: 12px;
 }
 }
 
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

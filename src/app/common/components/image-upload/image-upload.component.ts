@@ -21,6 +21,8 @@ export class ImageUploadComponent implements OnInit {
 
 	@Output() imageUploaded = new EventEmitter();
 	@Output() imageError = new EventEmitter();
+	@Output() imageLoadedToContainer = new EventEmitter();
+	@Output() croppingCanceled = new EventEmitter();
 
 	@ViewChild('inputFile') myInputVariable: ElementRef;
 
@@ -37,7 +39,6 @@ export class ImageUploadComponent implements OnInit {
 
 	fileChangeEvent(event: any): void {
 		this.imageChangedEvent = event;
-		debugger;
 	}
 	imageCropped(event: ImageCroppedEvent) {
 		console.log('1')
@@ -48,10 +49,15 @@ export class ImageUploadComponent implements OnInit {
 		return this.selectedFile = new FileSnippet('', this.croppedImage)
 	}
 	imageLoaded() {
-		debugger
-		// show cropper
-		console.log("1");
+		this.imageLoadedToContainer.emit();
 	}
+
+	cancelCropping() {
+		this.imageChangedEvent = null;
+		this.croppingCanceled.emit();
+		
+	}
+
 	cropperReady() {
 		// cropper ready
 		console.log("2");
@@ -93,14 +99,13 @@ export class ImageUploadComponent implements OnInit {
 				}
 				else{
 					//self.imageChangedEvent = null;
-					this.myInputVariable.nativeElement.value = '';
+					self.myInputVariable.nativeElement.value = '';
 					self.toastService.error(`Min width is ${FileSnippet.IMAGE_SIZE.width} and Min height is ${FileSnippet.IMAGE_SIZE.height}`, 'Error!')
 				}
 			}
 			img.src = URL.createObjectURL(file);
 		}
 		else{
-			debugger;
 			this.myInputVariable.nativeElement.value = '';
 			event.target.files = null;
 			//this.imageChangedEvent = null;

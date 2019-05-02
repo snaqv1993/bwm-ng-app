@@ -8,6 +8,7 @@
 </label>
 
 <button *ngIf="imageChangedEvent" (click)='uploadImage($event)' type="button" class= "btn btn-success">Upload Image</button>
+<button *ngIf="imageChangedEvent" (click)='cancelCropping()' type="button" class= "btn btn-danger">Cancel</button>
 
 <image-cropper
 	*ngIf="imageChangedEvent"
@@ -17,7 +18,7 @@
     [resizeToWidth]="950"
     format="jpg"
     (imageCropped)="imageCropped($event)"
-    
+    (imageLoaded) = "imageLoaded()"
     (loadImageFailed)="loadImageFailed()"
 ></image-cropper>
 

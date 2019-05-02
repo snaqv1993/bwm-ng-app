@@ -1,12 +1,43 @@
 <a routerLink="/rentals/{{rental._id}}">
 	<div class="card bwm-card">
 		<img class="card-img-top" src="{{rental.image}}" alt="">
-			<div class="card-block">
+		<div class="card-block">
 			<h6 class="card-subtitle {{rental.category}}">{{rental.shared ? 'Shared' : 'Entire'}} {{rental.category}} &#183; {{rental.city}}</h6>
 			<h4 class="card-title">{{rental.title}}</h4>
 			<p class="card-text">{{rental.dailyRate}} per Night &#183; Free Cancelation</p>
 			<a href="#" class="card-link">More Info</a>S
-			</div>
+		</div>
 	</div>
 </a>
 
+
+<!-- <mat-card class="example-card">
+	<a routerLink="/rentals/{{rental._id}}">
+		<div class="card bwm-card">
+			<img class="card-img-top" src="{{rental.image}}" alt="">
+			<div class="card-block">
+				<mat-card-subtitle><h6 class="card-subtitle {{rental.category}}">{{rental.shared ? 'Shared' : 'Entire'}} {{rental.category}} &#183; {{rental.city}}</h6></mat-card-subtitle>
+				<mat-card-header><h4 class="card-title">{{rental.title}}</h4></mat-card-header>
+				<p class="card-text">{{rental.dailyRate}} per Night &#183; Free Cancelation</p>
+				<a href="#" class="card-link">More Info</a>S
+			</div>
+		</div>
+	</a>
+	<mat-card-header>
+		<div mat-card-avatar class="example-header-image"></div>
+		<mat-card-title>Shiba Inu</mat-card-title>
+		<mat-card-subtitle>Dog Breed</mat-card-subtitle>
+	</mat-card-header>
+	<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+	<mat-card-content>
+		<p>
+			The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+			A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+			bred for hunting.
+		</p>
+	</mat-card-content>
+	<mat-card-actions>
+		<button mat-button>LIKE</button>
+		<button mat-button>SHARE</button>
+	</mat-card-actions>
+</mat-card> -->

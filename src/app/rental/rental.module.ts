@@ -9,6 +9,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { EditableModule } from '../common/components/editable/editable.module';
 import { ImageUploadModule } from '../common/components/image-upload/image-upload.module';
+import {MatButtonModule, MatCheckboxModule} from '@angular/material';
+import {MatCardModule} from '@angular/material/card';
 
 
 import { RentalListComponent } from './rental-list/rental-list.component';
@@ -68,7 +70,10 @@ const routes: Routes = [
     	Daterangepicker,
     	FormsModule,
     	EditableModule,
-    	ImageUploadModule
+    	ImageUploadModule,
+    	MatButtonModule, 
+    	MatCheckboxModule,
+    	MatCardModule
 	],
 	providers: [
 		RentalService,

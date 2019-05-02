@@ -12,12 +12,17 @@ export class EditableImageComponent extends EditableComponent  implements OnInit
   ngOnInit() {
   }
 
-  handleImageUpload(){
-
+  handleImageUpload(imageUrl : string){
+  	this.entity[this.entityField] = imageUrl;
+  	this.updateEntity();
   }
 
   handleImageUploadError(){
-  	
+  	this.cancelUpdate();
+  }
+
+  handlerImageLoad(){
+  	this.isActiveInput = true;
   }
 
 }
